@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="rootScene" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nstu.labbi.AntController">
+   <children>
+      <Pane fx:id="workspacePane" layoutX="13.0" layoutY="119.0" prefHeight="587.0" prefWidth="1254.0" style="-fx-background-color: #D3D3D3;" />
+      <VBox fx:id="statContainer" alignment="CENTER" layoutX="12.0" layoutY="57.0" style="-fx-background-color: #D3D3D3;" visible="false">
+         <children>
+            <Label fx:id="statTimerLabel" text="С начала симуляции прошло 00:00 (00 сек)">
+               <font>
+                  <Font name="HP Simplified Bold Italic" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="statOverallCountLabel" text="Было рождено 0 муравьев, из них" textFill="RED">
+               <font>
+                  <Font name="Palatino Linotype" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="statWorkerCountLabel" text="Рабочих: 0" textFill="#8c6666">
+               <font>
+                  <Font name="Verdana Italic" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="statWarriorCountLabel" text="Воинов: 0" textFill="#56abdc">
+               <font>
+                  <Font name="Book Antiqua" size="25.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="15.0" top="15.0" />
+         </padding>
+      </VBox>
+      <MenuBar layoutX="6.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Simulation">
+              <items>
+                <MenuItem fx:id="startMenuItem" mnemonicParsing="false" text="Start" />
+                  <MenuItem fx:id="stopMenuItem" disable="true" mnemonicParsing="false" text="Stop" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Info">
+              <items>
+                  <CheckMenuItem fx:id="infoMenuItem" mnemonicParsing="false" selected="true" text="Show Info" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Timer">
+              <items>
+                  <RadioMenuItem fx:id="showTimerMenuItem" mnemonicParsing="false" selected="true" text="Show Timer" />
+                  <RadioMenuItem fx:id="hideTimerMenuItem" mnemonicParsing="false" text="Hide Timer" />
+              </items>
+            </Menu>
+         </menus>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+      </MenuBar>
+      <HBox alignment="CENTER_LEFT" layoutX="13.0" layoutY="26.0" prefHeight="89.0" prefWidth="1254.0" spacing="10.0" style="-fx-background-color: #D3d3D3;">
+         <children>
+            <Pane prefHeight="100.0" prefWidth="218.0">
+               <children>
+                  <Label fx:id="timerLabel" layoutX="10.0" layoutY="-3.0" prefHeight="34.0" prefWidth="80.0" text="Timer:">
+                     <font>
+                        <Font name="Consolas Bold" size="23.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="time" layoutX="90.0" layoutY="-3.0" prefHeight="34.0" text="00:00">
+                     <font>
+                        <Font name="Bookman Old Style Bold" size="23.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="startButton" layoutX="10.0" layoutY="45.0" mnemonicParsing="false" text="Start" />
+                  <Button fx:id="stopButton" disable="true" layoutX="60.0" layoutY="45.0" mnemonicParsing="false" text="Stop" />
+                  <CheckBox fx:id="infoCheckBox" layoutX="121.0" layoutY="49.0" mnemonicParsing="false" selected="true" text="Show Info" />
+               </children>
+            </Pane>
+            <VBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="104.0" spacing="8.0" style="-fx-background-color: #F0F0F0;">
+               <children>
+                  <RadioButton fx:id="showTimerRadioButton" mnemonicParsing="false" selected="true" text="Show Timer">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" />
+                     </VBox.margin>
+                  </RadioButton>
+                  <RadioButton fx:id="hideTimerRadioButton" mnemonicParsing="false" text="Hide Timer">
+                     <VBox.margin>
+                        <Insets left="5.0" />
+                     </VBox.margin>
+                  </RadioButton>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="69.0" spacing="8.0" style="-fx-background-color: #d3d3d3;">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" style="-fx-background-color: #D3D3D3;">
+                     <children>
+                        <Label text="N1" />
+                        <TextField fx:id="N1TextField" prefHeight="25.0" prefWidth="34.0" text="2" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                     <children>
+                        <Label text="N2" />
+                        <TextField fx:id="N2TextField" prefHeight="25.0" prefWidth="34.0" text="3" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="57.0" prefWidth="104.0" spacing="8.0" style="-fx-background-color: #d3d3d3;">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" style="-fx-background-color: #d3d3d3;">
+                     <children>
+                        <Label text="P1" />
+                        <ComboBox fx:id="P1ComboBox" prefHeight="25.0" prefWidth="84.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" style="-fx-background-color: #d3d3d3;">
+                     <children>
+                        <Label text="P2" />
+                        <ComboBox fx:id="P2ComboBox" prefHeight="25.0" prefWidth="84.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="66.0" prefWidth="128.0" spacing="8.0">
+               <children>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <left>
+                        <Label text="Workers lifetime" BorderPane.alignment="CENTER_LEFT" />
+                     </left>
+                     <right>
+                        <TextField fx:id="workerLifetimeTextField" prefHeight="26.0" prefWidth="34.0" text="5" BorderPane.alignment="CENTER" />
+                     </right>
+                  </BorderPane>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <left>
+                        <Label text="Warriors lifetime" BorderPane.alignment="CENTER_LEFT" />
+                     </left>
+                     <right>
+                        <TextField fx:id="warriorLifetimeTextField" prefWidth="34.0" text="3" BorderPane.alignment="CENTER" />
+                     </right>
+                  </BorderPane>
+               </children>
+            </VBox>
+            <Button fx:id="currentObjectsButton" mnemonicParsing="false" prefHeight="54.0" prefWidth="58.0" text="Current objects" wrapText="true">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Button>
+            <VBox alignment="CENTER_LEFT" prefHeight="66.0" spacing="8.0">
+               <children>
+                  <Button fx:id="workersAIButton" mnemonicParsing="false" text="Toggle Workers AI" />
+                  <Button fx:id="warriorsAIButton" mnemonicParsing="false" text="Toggle Warriors AI" />
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="12.0" top="12.0" />
+         </padding>
+      </HBox>
+   </children>
+</Pane>
