@@ -16,7 +16,7 @@ public class InfoDialogWindow extends DialogWindow{
     public InfoDialogWindow(Stage owner, String text) {
         super(owner, "Статистика симуляции");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ru/nstu/labbi/DialogWindows/InfoDialog.fxml"));
-        Scene scene = null;
+        Scene scene;
         try {
             scene = new Scene(fxmlLoader.load());
         } catch (IOException e) {

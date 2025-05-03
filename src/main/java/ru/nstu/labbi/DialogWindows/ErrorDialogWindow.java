@@ -14,7 +14,7 @@ public class ErrorDialogWindow extends DialogWindow {
     public ErrorDialogWindow(Stage owner, String errorText) {
         super(owner, "Ошибка!");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ru/nstu/labbi/DialogWindows/ErrorDialog.fxml"));
-        Scene scene = null;
+        Scene scene;
         try {
             scene = new Scene(fxmlLoader.load());
         } catch (IOException e) {

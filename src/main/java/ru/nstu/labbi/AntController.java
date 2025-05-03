@@ -9,7 +9,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import ru.nstu.labbi.DialogWindows.CurrentObjectsDialogWindow;
 import ru.nstu.labbi.DialogWindows.ErrorDialogWindow;
 import ru.nstu.labbi.DialogWindows.InfoDialogWindow;
@@ -116,7 +115,7 @@ public class AntController {
     private long sec;
 
     @FXML
-    public void initElements() throws IOException {
+    public void initElements() {
         initHabitat();
         initTimer();
         initButtonsAndKeys();
@@ -127,9 +126,7 @@ public class AntController {
     private void initHabitat() {
         habitat = new Habitat(workspacePane);
 
-        ((Stage) workspacePane.getScene().getWindow()).setOnCloseRequest(windowEvent -> {
-            stop();
-        });
+        (workspacePane.getScene().getWindow()).setOnCloseRequest(windowEvent -> stop());
     }
 
     //TODO Сделать нормально организованный таймер

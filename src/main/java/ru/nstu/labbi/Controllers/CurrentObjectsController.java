@@ -24,8 +24,6 @@ public class CurrentObjectsController {
 
         listView.setItems(list);
 
-        okBtn.setOnAction(actionEvent -> {
-            ((Stage)okBtn.getScene().getWindow()).close();
-        });
+        okBtn.setOnAction(actionEvent ->( (Stage)okBtn.getScene().getWindow()).close() );
     }
 }

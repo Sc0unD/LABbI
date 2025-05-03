@@ -4,7 +4,6 @@ import javafx.scene.image.Image;
 import ru.nstu.labbi.Habitat;
 
 import java.util.Objects;
-import java.util.Random;
 
 public class AntWarrior extends Ant {
 

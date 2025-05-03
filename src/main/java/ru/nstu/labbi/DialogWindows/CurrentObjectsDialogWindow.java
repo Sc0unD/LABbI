@@ -18,7 +18,7 @@ public class CurrentObjectsDialogWindow extends DialogWindow {
     public CurrentObjectsDialogWindow(Stage owner, TreeMap<Integer,Long> treeMap) {
         super(owner, "Текущие объекты");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ru/nstu/labbi/DialogWindows/CurrentObjects.fxml"));
-        Scene scene = null;
+        Scene scene;
         try {
             scene = new Scene(fxmlLoader.load());
         } catch (IOException e) {
@@ -33,9 +33,9 @@ public class CurrentObjectsDialogWindow extends DialogWindow {
         Stream<Map.Entry<Integer,Long>> stream = treeMap.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getValue));
 
         List<Map.Entry<Integer,Long>> entryList = stream.toList();
-        int maxValueLength = 0;
-        int maxKeyLength = 0;
-        int maxNumberLength = 0;
+        int maxValueLength;
+        int maxKeyLength;
+        int maxNumberLength;
 
         ObservableList<String> list = FXCollections.observableArrayList();
 

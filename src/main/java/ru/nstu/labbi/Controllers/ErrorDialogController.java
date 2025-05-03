@@ -16,9 +16,7 @@ public class ErrorDialogController {
     public void init(String areaText) {
         text.setText(areaText);
 
-        okBtn.setOnAction(actionEvent -> {
-            ((Stage)okBtn.getScene().getWindow()).close();
-        });
+        okBtn.setOnAction(actionEvent -> ( (Stage)okBtn.getScene().getWindow()).close() );
     }
 
 }

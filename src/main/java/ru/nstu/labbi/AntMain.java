@@ -1,14 +1,11 @@
 package ru.nstu.labbi;
 
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.Vector;
 
 public class AntMain extends Application {
 

@@ -1,9 +1,7 @@
 package ru.nstu.labbi;
 
 import javafx.scene.layout.Pane;
-import ru.nstu.labbi.Ants.Ant;
-import ru.nstu.labbi.Ants.AntWarrior;
-import ru.nstu.labbi.Ants.AntWorker;
+import ru.nstu.labbi.Ants.*;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -12,8 +10,6 @@ import java.util.Vector;
 
 public class Containers {
 
-    private Ant ant;
-
     private static class Holder {
         private final static Containers instance = new Containers();
     }
@@ -21,7 +17,6 @@ public class Containers {
     private final Vector<Ant> ants;
     private final HashSet<Integer> identifiers;
     private final TreeMap<Integer, Long> birthTimes;
-    private Pane pane;
 
     private Containers() {
         ants = new Vector<>();

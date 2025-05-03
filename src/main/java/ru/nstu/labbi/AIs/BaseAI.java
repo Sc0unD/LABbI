@@ -1,10 +1,6 @@
 package ru.nstu.labbi.AIs;
 
-import ru.nstu.labbi.Ants.Ant;
 import ru.nstu.labbi.Containers;
-
-import java.util.Vector;
-import java.util.concurrent.Semaphore;
 
 public abstract class BaseAI {
 
@@ -24,7 +20,7 @@ public abstract class BaseAI {
 
         runnable = () -> {
             long startTime = System.nanoTime();
-            long endTime = 0;
+            long endTime;
             int mills;
             int nanos;
             try {
