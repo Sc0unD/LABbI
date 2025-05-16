@@ -141,4 +141,12 @@ public abstract class Ant implements IBehaviour {
     public void setId(int id) {
         this.id = id;
     }
+
+    public double getSpeedX() {
+        return speedX;
+    }
+
+    public double getSpeedY() {
+        return speedY;
+    }
 }

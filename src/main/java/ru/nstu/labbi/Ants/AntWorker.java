@@ -10,6 +10,7 @@ public class AntWorker extends Ant {
     private static final Image image = new Image(Objects.requireNonNull(Habitat.class.getResource("Images/black ant.png")).toExternalForm());
 
     private boolean configure = false;
+    private boolean isMovingToCorner = true;
 
     private static final double cornerX = 0;
     private static final double cornerY = 0;
@@ -36,5 +37,13 @@ public class AntWorker extends Ant {
 
     public static double getCornerY() {
         return cornerY;
+    }
+
+    public boolean isMovingToCorner() {
+        return isMovingToCorner;
+    }
+
+    public void toggleMovingToCorner() {
+        isMovingToCorner = !isMovingToCorner;
     }
 }

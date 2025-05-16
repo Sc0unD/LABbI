@@ -2,6 +2,7 @@ package ru.nstu.labbi;
 
 import java.util.*;
 
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -80,11 +81,7 @@ public class Habitat {
     }
 
     private void addAnt(Ant ant , long time) {
-        ant.setStartX(random.nextDouble(0, mainPane.getWidth() - Ant.getImgWidth()));
-        ant.setStartY(random.nextDouble(0, mainPane.getHeight() - Ant.getImgHeight()));
 
-        ant.setX(ant.getStartX());
-        ant.setY(ant.getStartY());
 
         //System.out.println(ant.getStartX() + "  " + ant.getStartY());
 
@@ -94,16 +91,27 @@ public class Habitat {
         int speedX = 0;
         int speedY = 0;
 
+        double x = 0;
+        double y = 0;
+
         if (ant instanceof AntWorker) {
             lifetime = workersLifetime;
-//            speedX = random.nextInt(3,5);
-//            speedY = random.nextInt(3,5);
+            while (x < mainPane.getWidth()*0.3 && y < mainPane.getHeight()*0.3) {
+                x = random.nextDouble(mainPane.getWidth()*0.3, mainPane.getWidth() - Ant.getImgWidth());
+                y = random.nextDouble(mainPane.getHeight()*0.3, mainPane.getHeight() - Ant.getImgHeight());
+            }
+
         }
         if (ant instanceof AntWarrior) {
             lifetime = warriorLifetime;
-//            speedX = random.nextInt(5,10);
-//            speedY = random.nextInt(5,10);
+            x = random.nextDouble(WarriorAI.R * 1.05, mainPane.getWidth() - Ant.getImgWidth() - WarriorAI.R * 1.05);
+            y = random.nextDouble(0, mainPane.getHeight() - Ant.getImgHeight() - WarriorAI.R * 1.05 * 2);
+            ant.setStartY(y + WarriorAI.R);
         }
+
+        ant.setStartX(x);
+        ant.setX(x);
+        ant.setY(y);
 
         ant.setLifeTime(lifetime);
         ant.setSpeedX(speedX);
@@ -115,14 +123,9 @@ public class Habitat {
         while (containers.containsId(id)) id = random.nextInt(10000,100000);
         ant.setId(id);
 
-        try {
-            containers.addAnt(ant);
-            mainPane.getChildren().add(ant.getImageView());
-        }
-        catch (Exception e) {
-            System.out.println("Ми дабавлять муравей");
-            e.printStackTrace();
-        }
+        containers.addAnt(ant);
+        mainPane.getChildren().add(ant.getImageView());
+
     }
 
     private void moveAnts() {
@@ -146,49 +149,27 @@ public class Habitat {
         setBackGround();
     }
 
-    public long getAntsCount() {
-        return containers.getAntsCount();
-    }
+    public long getAntsCount() { return containers.getAntsCount(); }
 
-    public long getWorkersAntsCount() {
-        return containers.getWorkersCount();
-    }
+    public long getWorkersAntsCount() { return containers.getWorkersCount(); }
 
-    public long getWarriorsAntsCount() {
-        return containers.getWarriorsCount();
-    }
+    public long getWarriorsAntsCount() { return containers.getWarriorsCount(); }
 
-    public Image getBackgroundImage() {
-        return backgroundImage;
-    }
+    public Image getBackgroundImage() { return backgroundImage; }
 
-    public static void setN1(int n1) {
-        N1 = n1;
-    }
+    public static void setN1(int n1) { N1 = n1; }
 
-    public static void setN2(int n2) {
-        N2 = n2;
-    }
+    public static void setN2(int n2) { N2 = n2; }
 
-    public static void setP1(int p1) {
-        P1 = p1;
-    }
+    public static void setP1(int p1) { P1 = p1; }
 
-    public static void setP2(int p2) {
-        P2 = p2;
-    }
+    public static void setP2(int p2) { P2 = p2; }
 
-    public static void setWorkersLifetime(long workersLifetime) {
-        Habitat.workersLifetime = workersLifetime;
-    }
+    public static void setWorkersLifetime(long workersLifetime) { Habitat.workersLifetime = workersLifetime; }
 
-    public static void setWarriorLifetime(long warriorLifetime) {
-        Habitat.warriorLifetime = warriorLifetime;
-    }
+    public static void setWarriorLifetime(long warriorLifetime) { Habitat.warriorLifetime = warriorLifetime; }
 
-    public TreeMap<Integer, Long> getBirthTimes() {
-        return containers.getBirthTimes();
-    }
+    public TreeMap<Integer, Long> getBirthTimes() { return containers.getBirthTimes(); }
 
     public void startAI() {
         workerAI.start();

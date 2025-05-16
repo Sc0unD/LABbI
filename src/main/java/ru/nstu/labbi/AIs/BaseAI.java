@@ -24,26 +24,18 @@ public abstract class BaseAI {
             int mills;
             int nanos;
             try {
-                //System.out.println(Thread.currentThread().getName() +  " пробует зайти в цикл");
                 while (!Thread.currentThread().isInterrupted()) {
+                    endTime = System.nanoTime();
+                    long dt = endTime - startTime;
+                    if (dt < FRAME_TIME) {
+                         nanos = (int)(FRAME_TIME - dt);
+                         mills = nanos / 1_000_000;
+                         nanos -= mills * 1_000_000;
+                         Thread.sleep(mills, nanos);
+                    }
                     synchronized (containers) {
-                    //System.out.println(Thread.currentThread().getName() +  " в цикле и пробует пробится в кадр");
-
-                        endTime = System.nanoTime();
-                        long dt = endTime - startTime;
-
-                         if (dt < FRAME_TIME) {
-                            // System.out.println(Thread.currentThread().getName() +  " начал ждать " + FRAME_TIME + " ns");
-                             nanos = (int)(FRAME_TIME - dt);
-                             mills = nanos / 1_000_000;
-                             nanos -= mills * 1_000_000;
-                             //System.out.println(Thread.currentThread().getName() +  " ждет " + mills + "ms " + nanos + " ns");
-                             Thread.sleep(mills, nanos);
-                        }
-
-                        //System.out.println(Thread.currentThread().getName() +  " в кадре щас будет двигать");
                         moveAnts();
-                        startTime = endTime;
+                        startTime = System.nanoTime();
                     }
                 }
             }
@@ -68,8 +60,6 @@ public abstract class BaseAI {
         thread = new Thread(runnable);
         thread.setName(name);
     }
-
-
 
     protected abstract void moveAnts();
 }
