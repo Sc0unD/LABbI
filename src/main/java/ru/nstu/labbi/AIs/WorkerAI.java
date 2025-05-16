@@ -72,7 +72,7 @@ public class WorkerAI extends BaseAI {
 
             double distance = Math.sqrt(dx*dx + dy*dy);
 
-            if (distance < 1) {
+            if (distance < V) {
                 ((AntWorker) ant).toggleMovingToCorner();
             }
             else {
@@ -83,6 +83,18 @@ public class WorkerAI extends BaseAI {
                     ant.setY(y);
                 });
             }
+
+//            String s = String.format("""
+//                    Start: %f %f
+//                    Diff: %f %f
+//                    Cord: %f %f \n\n
+//                    """,
+//                    ant.getStartX(), ant.getStartY(),
+//                    dx, dy,
+//                    ant.getX(), ant.getY()
+//                    );
+//
+//            System.out.println(s);
         }
     }
 

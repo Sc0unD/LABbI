@@ -35,6 +35,8 @@ public class Habitat {
     private final WorkerAI workerAI;
     private final WarriorAI warriorAI;
 
+
+
     public Habitat(Pane pane) {
         mainPane = pane;
         setBackGround();
@@ -43,6 +45,9 @@ public class Habitat {
 
         workerAI = new WorkerAI("Workers");
         warriorAI = new WarriorAI("Warriors");
+
+        workerAI.setPriority(Thread.NORM_PRIORITY);
+        warriorAI.setPriority(Thread.NORM_PRIORITY);
     }
 
     public void setBackGround() {
@@ -100,6 +105,7 @@ public class Habitat {
                 x = random.nextDouble(mainPane.getWidth()*0.3, mainPane.getWidth() - Ant.getImgWidth());
                 y = random.nextDouble(mainPane.getHeight()*0.3, mainPane.getHeight() - Ant.getImgHeight());
             }
+            ant.setStartY(y);
 
         }
         if (ant instanceof AntWarrior) {
@@ -177,7 +183,39 @@ public class Habitat {
     }
 
     public void stopAI() {
+        resumeWorkersAI();
+        resumeWarriorsAI();
         workerAI.stop();
         warriorAI.stop();
+    }
+
+    public void stopWorkersAI() {
+        workerAI.pause();
+    }
+
+    public void stopWarriorsAI() {
+        warriorAI.pause();
+    }
+
+    public void resumeWorkersAI() {
+        synchronized (workerAI) {
+            workerAI.resume();
+            workerAI.notify();
+        }
+    }
+
+    public void resumeWarriorsAI() {
+        synchronized (warriorAI) {
+            warriorAI.resume();
+            warriorAI.notify();
+        }
+    }
+
+    public void setWorkersAIPriority(int i) {
+        workerAI.setPriority(i);
+    }
+
+    public void setWarriorsAIPriority(int i) {
+        warriorAI.setPriority(i);
     }
 }

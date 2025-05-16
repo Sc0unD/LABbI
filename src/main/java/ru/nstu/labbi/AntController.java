@@ -101,11 +101,19 @@ public class AntController {
     @FXML
     private Button warriorsAIButton;
 
+    @FXML
+    private ComboBox<String> comboBoxPriorityWorkersAI;
+
+    @FXML
+    private ComboBox<String> comboBoxPriorityWarriorsAI;
+
     private Habitat habitat;
     private AnimationTimer timer;
 
     private boolean simulationStarted = false;
     private boolean showInfo = true;
+    private boolean isWorkersAIEnabled = true;
+    private boolean isWarriorsAIEnabled = true;
 
     private long startTime;
     private long pauseTime;
@@ -171,6 +179,9 @@ public class AntController {
                 }
             }
         });
+
+        workersAIButton.setOnAction(actionEvent -> toggleWorkersAI());
+        warriorsAIButton.setOnAction(actionEvent -> toggleWarriorsAI());
     }
 
     private void initSettingsButtons() {
@@ -190,6 +201,40 @@ public class AntController {
 
         showTimerMenuItem.setOnAction(actionEvent -> showTimer());
         hideTimerMenuItem.setOnAction(actionEvent -> hideTimer());
+
+        ObservableList<String> list = FXCollections.observableArrayList("MIN_PRIORITY", "NORM_PRIORITY", "MAX_PRIORITY");
+
+        comboBoxPriorityWorkersAI.setItems(list);
+        comboBoxPriorityWarriorsAI.setItems(list);
+
+        comboBoxPriorityWorkersAI.setValue(list.get(1));
+        comboBoxPriorityWarriorsAI.setValue(list.get(1));
+
+        comboBoxPriorityWorkersAI.setOnAction(actionEvent -> {
+            String selected = comboBoxPriorityWorkersAI.getValue();
+            int priority;
+
+            switch (selected) {
+                case "MIN_PRIORITY" -> priority = Thread.MIN_PRIORITY;
+                case "MAX_PRIORITY" -> priority = Thread.MAX_PRIORITY;
+                default -> priority = Thread.NORM_PRIORITY;
+            }
+
+            habitat.setWorkersAIPriority(priority);
+        });
+
+        comboBoxPriorityWarriorsAI.setOnAction(actionEvent -> {
+            String selected = comboBoxPriorityWarriorsAI.getValue();
+            int priority;
+
+            switch (selected) {
+                case "MIN_PRIORITY" -> priority = Thread.MIN_PRIORITY;
+                case "MAX_PRIORITY" -> priority = Thread.MAX_PRIORITY;
+                default -> priority = Thread.NORM_PRIORITY;
+            }
+
+            habitat.setWarriorsAIPriority(priority);
+        });
     }
 
     private void initAntsSettings() {
@@ -313,30 +358,18 @@ public class AntController {
         if (!simulationStarted) return;
         pauseTime = System.nanoTime();
         timer.stop();
-
+        pauseWorkersAI();
+        pauseWarriorsAI();
     }
 
     private void resumeTimer() {
         if (!simulationStarted) return;
         startTime += System.nanoTime() - pauseTime;
         timer.start();
+        resumeWorkersAI();
+        resumeWarriorsAI();
     }
 
-    private void pauseWorkersAI() {
-
-    }
-
-    private void pauseWarriorsAI() {
-
-    }
-
-    private void resumeWorkersAI() {
-
-    }
-
-    private void resumeWarriorsAI() {
-
-    }
 
     private void showInfoDialog() {
         pauseTimer();
@@ -465,4 +498,33 @@ public class AntController {
         }
     }
 
+    private void toggleWorkersAI() {
+        if (isWorkersAIEnabled) pauseWorkersAI();
+        else resumeWorkersAI();
+    }
+
+    private void toggleWarriorsAI() {
+        if (isWarriorsAIEnabled) pauseWarriorsAI();
+        else resumeWarriorsAI();
+    }
+
+    private void pauseWorkersAI() {
+        habitat.stopWorkersAI();
+        isWorkersAIEnabled = false;
+    }
+
+    private void pauseWarriorsAI() {
+        habitat.stopWarriorsAI();
+        isWarriorsAIEnabled = false;
+    }
+
+    private void resumeWorkersAI() {
+        habitat.resumeWorkersAI();
+        isWorkersAIEnabled = true;
+    }
+
+    private void resumeWarriorsAI() {
+        habitat.resumeWarriorsAI();
+        isWarriorsAIEnabled = true;
+    }
 }

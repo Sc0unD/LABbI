@@ -11,6 +11,8 @@ public abstract class BaseAI {
 
     private final String name;
 
+    private boolean isRunning = true;
+
     protected static final long FPS = 60;
     private static final long FRAME_TIME = 1_000_000_000 / FPS;
 
@@ -25,6 +27,17 @@ public abstract class BaseAI {
             int nanos;
             try {
                 while (!Thread.currentThread().isInterrupted()) {
+                    synchronized (this) {
+                        if (!isRunning) {
+                            try {
+                                wait();
+                            }
+                            catch (InterruptedException e) {
+                                System.out.println("Поток " + name + " немного прерван зайдите позже");
+                            }
+                        }
+                    }
+
                     endTime = System.nanoTime();
                     long dt = endTime - startTime;
                     if (dt < FRAME_TIME) {
@@ -40,7 +53,7 @@ public abstract class BaseAI {
                 }
             }
             catch (InterruptedException e) {
-                System.out.println("Убило усыпленный поток");
+                System.out.println("Поток " + name + " немного собрался помирать");
             }
         };
 
@@ -48,7 +61,7 @@ public abstract class BaseAI {
     }
 
     public void start() {
-        if (!thread.isInterrupted()) resetThread();
+        if (thread.isInterrupted()) resetThread();
         thread.start();
     }
 
@@ -59,6 +72,18 @@ public abstract class BaseAI {
     private void resetThread() {
         thread = new Thread(runnable);
         thread.setName(name);
+    }
+
+    public void pause() {
+        isRunning = false;
+    }
+
+    public void resume() {
+        isRunning = true;
+    }
+
+    public void setPriority(int i) {
+        thread.setPriority(i);
     }
 
     protected abstract void moveAnts();
