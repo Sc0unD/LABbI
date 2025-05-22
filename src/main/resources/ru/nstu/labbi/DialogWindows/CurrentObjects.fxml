@@ -4,7 +4,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="379.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nstu.labbi.Controllers.CurrentObjectsController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="379.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nstu.labbi.Controllers.CurrentObjectsController">
    <children>
       <Button fx:id="okBtn" layoutX="256.0" layoutY="340.0" mnemonicParsing="false" text="OK" />
       <ListView fx:id="listView" layoutX="12.0" layoutY="31.0" prefHeight="291.0" prefWidth="277.0" />

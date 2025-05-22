@@ -85,5 +85,4 @@ public class Containers {
     public long getWarriorsCount() {
         return ants.stream().filter(ant -> ant instanceof AntWarrior).count();
     }
-
 }

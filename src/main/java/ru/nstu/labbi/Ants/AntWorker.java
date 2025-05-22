@@ -9,7 +9,6 @@ public class AntWorker extends Ant {
 
     private static final Image image = new Image(Objects.requireNonNull(Habitat.class.getResource("Images/black ant.png")).toExternalForm());
 
-    private boolean configure = false;
     private boolean isMovingToCorner = true;
 
     private static final double cornerX = 0;
@@ -21,14 +20,6 @@ public class AntWorker extends Ant {
 
     public AntWorker() {
         this(0, 0,0,0,0);
-    }
-
-    public boolean isConfigure() {
-        return configure;
-    }
-
-    public void setConfigureTrue() {
-        configure = true;
     }
 
     public static double getCornerX() {
@@ -45,5 +36,14 @@ public class AntWorker extends Ant {
 
     public void toggleMovingToCorner() {
         isMovingToCorner = !isMovingToCorner;
+    }
+
+    @Override
+    public void resetImage() {
+        setImageView(image);
+        imageView.setX(posX);
+        imageView.setY(posY);
+        imageView.setFitWidth(IMG_WIDTH);
+        imageView.setFitHeight(IMG_HEIGHT);
     }
 }

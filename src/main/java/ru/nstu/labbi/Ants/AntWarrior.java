@@ -24,4 +24,13 @@ public class AntWarrior extends Ant {
         angle += alpha;
         return oldAngle;
     }
+
+    @Override
+    public void resetImage() {
+        setImageView(image);
+        imageView.setX(posX);
+        imageView.setY(posY);
+        imageView.setFitWidth(IMG_WIDTH);
+        imageView.setFitHeight(IMG_HEIGHT);
+    }
 }

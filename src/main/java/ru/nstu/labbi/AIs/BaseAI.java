@@ -61,7 +61,8 @@ public abstract class BaseAI {
     }
 
     public void start() {
-        if (thread.isInterrupted()) resetThread();
+        if (thread.isInterrupted() || !thread.isAlive()) resetThread();
+        resetThread();
         thread.start();
     }
 

@@ -1,8 +1,8 @@
 package ru.nstu.labbi;
 
+import java.io.*;
 import java.util.*;
 
-import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -34,8 +34,6 @@ public class Habitat {
 
     private final WorkerAI workerAI;
     private final WarriorAI warriorAI;
-
-
 
     public Habitat(Pane pane) {
         mainPane = pane;
@@ -171,6 +169,30 @@ public class Habitat {
 
     public static void setP2(int p2) { P2 = p2; }
 
+    public static int getN1() {
+        return N1;
+    }
+
+    public static int getN2() {
+        return N2;
+    }
+
+    public static int getP1() {
+        return P1;
+    }
+
+    public static int getP2() {
+        return P2;
+    }
+
+    public static long getWorkersLifetime() {
+        return workersLifetime;
+    }
+
+    public static long getWarriorLifetime() {
+        return warriorLifetime;
+    }
+
     public static void setWorkersLifetime(long workersLifetime) { Habitat.workersLifetime = workersLifetime; }
 
     public static void setWarriorLifetime(long warriorLifetime) { Habitat.warriorLifetime = warriorLifetime; }
@@ -217,5 +239,33 @@ public class Habitat {
 
     public void setWarriorsAIPriority(int i) {
         warriorAI.setPriority(i);
+    }
+
+    public void loadAnts(File file) {
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file))) {
+            clear();
+
+            @SuppressWarnings("unchecked")
+            Vector<Ant> antVector = (Vector<Ant>) inputStream.readObject();
+
+            for (Ant ant : antVector) {
+                ant.setBirthTime(0);
+                ant.resetImage();
+                containers.addAnt(ant);
+                mainPane.getChildren().add(ant.getImageView());
+            }
+        }
+        catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveAnts(File file) {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file))) {
+            outputStream.writeObject(containers.getAnts());
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -3,11 +3,13 @@ package ru.nstu.labbi.Ants;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public abstract class Ant implements IBehaviour {
+import java.io.Serializable;
 
-    private final ImageView imageView;
-    private static final double IMG_WIDTH = 60.0;
-    private static final double IMG_HEIGHT = 60.0;
+public abstract class Ant implements IBehaviour, Serializable {
+
+    protected transient ImageView imageView;
+    protected static final double IMG_WIDTH = 60.0;
+    protected static final double IMG_HEIGHT = 60.0;
 
     private long birthTime;
     private long lifeTime;
@@ -17,6 +19,8 @@ public abstract class Ant implements IBehaviour {
 
     protected double startX;
     protected double startY;
+    protected double posX;
+    protected double posY;
 
     protected int id;
 
@@ -36,6 +40,11 @@ public abstract class Ant implements IBehaviour {
 
     public Ant(Image image) {
         this(image,0,0,0,0,0);
+    }
+
+    public void setImageView(Image image) {
+        imageView = new ImageView(image);
+
     }
 
     public boolean isDead(long time) {
@@ -100,23 +109,27 @@ public abstract class Ant implements IBehaviour {
 
     @Override
     public void setX(double x) {
+        posX = x;
         imageView.setX(x);
     }
 
     @Override
     public void setY(double y) {
+        posY = y;
         imageView.setY(y);
     }
 
     @Override
     public double getX() {
-        return imageView.getX();
+        return posX;
     }
 
     @Override
     public double getY() {
-        return imageView.getY();
+        return posY;
     }
+
+    public abstract void resetImage();
 
     public void setBirthTime(long birthTime) {
         this.birthTime = birthTime;

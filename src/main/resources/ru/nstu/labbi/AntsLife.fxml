@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="rootScene" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nstu.labbi.AntController">
+<Pane fx:id="rootScene" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nstu.labbi.AntController">
    <children>
       <Pane fx:id="workspacePane" layoutX="13.0" layoutY="119.0" prefHeight="587.0" prefWidth="1254.0" style="-fx-background-color: #D3D3D3;" />
       <VBox fx:id="statContainer" alignment="CENTER" layoutX="12.0" layoutY="57.0" style="-fx-background-color: #D3D3D3;" visible="false">
@@ -50,21 +50,31 @@
       </VBox>
       <MenuBar layoutX="6.0">
          <menus>
-            <Menu mnemonicParsing="false" text="Simulation">
+            <Menu mnemonicParsing="false" text="Menu">
               <items>
-                <MenuItem fx:id="startMenuItem" mnemonicParsing="false" text="Start" />
-                  <MenuItem fx:id="stopMenuItem" disable="true" mnemonicParsing="false" text="Stop" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Info">
-              <items>
-                  <CheckMenuItem fx:id="infoMenuItem" mnemonicParsing="false" selected="true" text="Show Info" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Timer">
-              <items>
-                  <RadioMenuItem fx:id="showTimerMenuItem" mnemonicParsing="false" selected="true" text="Show Timer" />
-                  <RadioMenuItem fx:id="hideTimerMenuItem" mnemonicParsing="false" text="Hide Timer" />
+                  <Menu mnemonicParsing="false" text="Simulation">
+                    <items>
+                      <MenuItem fx:id="startMenuItem" mnemonicParsing="false" text="Start" />
+                        <MenuItem fx:id="stopMenuItem" disable="true" mnemonicParsing="false" text="Stop" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Info">
+                    <items>
+                        <CheckMenuItem fx:id="infoMenuItem" mnemonicParsing="false" selected="true" text="Show Info" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Timer">
+                    <items>
+                        <RadioMenuItem fx:id="showTimerMenuItem" mnemonicParsing="false" selected="true" text="Show Timer" />
+                        <RadioMenuItem fx:id="hideTimerMenuItem" mnemonicParsing="false" text="Hide Timer" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="File saving">
+                    <items>
+                      <MenuItem fx:id="saveMenuItem" mnemonicParsing="false" text="Save" />
+                        <MenuItem fx:id="loadMenuItem" mnemonicParsing="false" text="Load" />
+                    </items>
+                  </Menu>
               </items>
             </Menu>
          </menus>
